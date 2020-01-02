@@ -3,7 +3,7 @@ package com.example.vaultconfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author Mark Paluch
+ * @author Shreekar Mayya S
  */
 @ConfigurationProperties("example")
 public class MyConfiguration {

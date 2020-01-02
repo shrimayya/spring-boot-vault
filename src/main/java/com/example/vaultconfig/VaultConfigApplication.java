@@ -44,7 +44,7 @@ class Application implements CommandLineRunner {
 
 		// You usually would not print a secret to stdout
 		VaultResponse response = vaultTemplate
-				.opsForKeyValue("secret", VaultKeyValueOperationsSupport.KeyValueBackend.KV_1).get("gs-vault-config/cloud");
+				.opsForKeyValue("secret", VaultKeyValueOperationsSupport.KeyValueBackend.KV_1).get("foo");
 		System.out.println("Value of foo");
 		System.out.println("-------------------------------");
 		System.out.println(response.getData().entrySet());
