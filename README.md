@@ -56,6 +56,8 @@ vault write mysql/config/connection connection_url="root:admin123@tcp(127.0.0.1:
 	
 	vault write mysql/roles/readonly \ db_name=mydb \sql="CREATE USER '{{name}}'@'localhost' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'localhost';
 	
+	vault write mysql/roles/readonly \sql="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'%';"
+	
 	vault read mysql/creds/readonly
 		
 
