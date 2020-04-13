@@ -55,7 +55,7 @@ class Application implements CommandLineRunner {
 		// You usually would not print a secret to stdout
 		VaultResponse response = vaultTemplate
 				.opsForKeyValue("secret", VaultKeyValueOperationsSupport.KeyValueBackend.KV_1).get("vault-config");
-		System.out.println("Value of foo");
+		System.out.println("Value of Vault config");
 		System.out.println("-------------------------------");
 		System.out.println(response.getData().entrySet());
 		System.out.println("-------------------------------");
@@ -68,7 +68,7 @@ class Application implements CommandLineRunner {
 			 Statement statement = connection.createStatement()) {
 			ResultSet resultSet = statement.executeQuery("SELECT CURRENT_USER();");
 			resultSet.next();
-			System.out.println("Connection works with User: " + resultSet.getString(1));
+			System.out.println("Current USER created dynamically ======================> " + resultSet.getString(1));
 			resultSet.close();
 		}
 	}
