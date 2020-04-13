@@ -10,6 +10,10 @@ _**vault operator init**_
 ####Command to unseal vault
 _**vault operator unseal**_
 
+
+####Command to enable KV Secrets Engine
+**_vault secrets enable -path=secret/ kv_**
+
 ####Command to put secret vault
 **_vault kv put secret/vault-config example.username=demouser example.password=demopassword_**
 
@@ -43,7 +47,6 @@ storage "file" {
 
 **_export VAULT_TOKEN="s.L1TODuJ9l9T0uJhMdnc7znIB"_**
 
-https://dzone.com/articles/managing-your-database-secrets-with-vault
 
 
 vault secrets enable mysql
@@ -55,7 +58,6 @@ vault write mysql/config/connection connection_url="root:admin123@tcp(127.0.0.1:
 	
 	vault read mysql/creds/readonly
 		
-Grant Permission since i am using docker mysql
 
 GRANT ALL PRIVILEGES ON *.* TO ''@'172.19.0.1' IDENTIFIED BY 'admin' WITH GRANT OPTION;
 
