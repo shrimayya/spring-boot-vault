@@ -11,6 +11,12 @@ import org.springframework.vault.core.VaultKeyValueOperationsSupport;
 import org.springframework.vault.core.VaultTemplate;
 import org.springframework.vault.support.VaultResponse;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 @SpringBootApplication
 //@EnableConfigurationProperties(MyConfiguration.class)
 class Application implements CommandLineRunner {
@@ -19,6 +25,10 @@ class Application implements CommandLineRunner {
 
 	@Autowired
 	private VaultTemplate vaultTemplate;
+
+	@Autowired
+	DataSource dataSource;
+
 
 
 	/*public Application(MyConfiguration configuration) {
@@ -44,11 +54,22 @@ class Application implements CommandLineRunner {
 
 		// You usually would not print a secret to stdout
 		VaultResponse response = vaultTemplate
-				.opsForKeyValue("secret", VaultKeyValueOperationsSupport.KeyValueBackend.KV_1).get("foo");
+				.opsForKeyValue("secret", VaultKeyValueOperationsSupport.KeyValueBackend.KV_1).get("vault-config");
 		System.out.println("Value of foo");
 		System.out.println("-------------------------------");
 		System.out.println(response.getData().entrySet());
 		System.out.println("-------------------------------");
 		System.out.println();
+	}
+
+	@PostConstruct
+	private void postConstruct() throws Exception {
+		try (Connection connection = dataSource.getConnection();
+			 Statement statement = connection.createStatement()) {
+			ResultSet resultSet = statement.executeQuery("SELECT CURRENT_USER();");
+			resultSet.next();
+			System.out.println("Connection works with User: " + resultSet.getString(1));
+			resultSet.close();
+		}
 	}
 }
