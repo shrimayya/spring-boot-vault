@@ -1,6 +1,9 @@
 ####Command to start vault
 **_vault server -config test.hcl_**
 
+####Command to set vault Address
+**_export VAULT_ADDR=http://127.0.0.1:8200_**
+
 ####Command to init vault
 _**vault operator init**_
 
