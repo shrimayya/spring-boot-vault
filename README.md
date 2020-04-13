@@ -48,13 +48,10 @@ https://dzone.com/articles/managing-your-database-secrets-with-vault
 
 vault secrets enable mysql
 
-
-vault write mysql/config/connection \
-	connection_url="root:admin@tcp(127.0.0.1:3306)/"
+vault write mysql/config/connection connection_url="root:admin123@tcp(127.0.0.1:3306)/"
 	
 	
-	vault write mysql/roles/readonly \ sql="CREATE USER '{{name}}'@'172.19.0.1' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'172.19.0.1';"
-	vault write mysql/roles/readonly sql="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL ON *.* TO '{{name}}'@'%';"
+	vault write mysql/roles/readonly \ db_name=mydb \sql="CREATE USER '{{name}}'@'localhost' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'localhost';
 	
 	vault read mysql/creds/readonly
 		
