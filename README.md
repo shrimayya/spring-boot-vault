@@ -46,3 +46,20 @@ storage "file" {
 https://dzone.com/articles/managing-your-database-secrets-with-vault
 
 
+vault secrets enable mysql
+
+
+vault write mysql/config/connection \
+	connection_url="root:admin@tcp(127.0.0.1:3306)/"
+	
+	
+	vault write mysql/roles/readonly \ sql="CREATE USER '{{name}}'@'172.19.0.1' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'172.19.0.1';"
+	vault write mysql/roles/readonly sql="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL ON *.* TO '{{name}}'@'%';"
+	
+	vault read mysql/creds/readonly
+		
+Grant Permission since i am using docker mysql
+
+GRANT ALL PRIVILEGES ON *.* TO ''@'172.19.0.1' IDENTIFIED BY 'admin' WITH GRANT OPTION;
+
+
