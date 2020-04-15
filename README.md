@@ -65,8 +65,6 @@ GRANT ALL PRIVILEGES ON *.* TO ''@'172.19.0.1' IDENTIFIED BY 'admin' WITH GRANT 
 
 Vault plugin Database config since mysql plugin is deprecated
 
-
-vault write mysql/roles/readonly \ db_name=mydb \sql="CREATE USER '{{name}}'@'localhost' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'localhost';
 	
 	vault write database/config/connection \
     plugin_name=mysql-database-plugin \
