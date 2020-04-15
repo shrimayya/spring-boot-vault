@@ -63,4 +63,23 @@ vault write mysql/config/connection connection_url="root:admin123@tcp(127.0.0.1:
 
 GRANT ALL PRIVILEGES ON *.* TO ''@'172.19.0.1' IDENTIFIED BY 'admin' WITH GRANT OPTION;
 
+Vault plugin Database config since mysql plugin is deprecated
+
+
+vault write mysql/roles/readonly \ db_name=mydb \sql="CREATE USER '{{name}}'@'localhost' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'localhost';
+	
+	vault write database/config/connection \
+    plugin_name=mysql-database-plugin \
+    connection_url="root:admin@tcp(172.28.0.2:3306)/" \
+    allowed_roles="readonly"
+    
+    vault write database/roles/readonly \
+    creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'%';" \
+    default_ttl="1h" \
+    max_ttl="24h"
+	
+	vault read database/creds/readonly
+
+
+
 
