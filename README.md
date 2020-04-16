@@ -79,5 +79,42 @@ Vault plugin Database config since mysql plugin is deprecated
 	vault read database/creds/readonly
 
 
+Vault Configuration for AppRole based authentication with whitelist IP poperties
 
+	vault secrets enable -path=my-secret/ kv
+
+	vault write my-secret/kar-secret value='Hi Shreekar'
+
+	vault list my-secret
+
+	vault read my-secret/kar-secret
+
+#Create hcl file and add below 
+
+	path "my-secret/*" {
+   	capabilities = ["read", "list"]
+	}
+
+	cat my-test.hcl
+
+	vault policy write my-test my-test.hcl
+
+	vault read /sys/policy/my-test
+
+	vault token create -policy="my-test"
+
+	vault list my-secret
+
+	vault read my-secret/kar-secret
+
+	vault write auth/approle/role/my-test secret_id_ttl=100m secret_id_num_uses=3 token_num_uses=3 token_ttl=10m token_max_ttl=30m policies=my-test
+ 
+# To the above command u can add secret_id_bound_cidrs=<IP-ADDRESS>  to make it more secured
+
+	vault read auth/approle/role/my-test
+
+
+	vault read auth/approle/role/my-test/role-id
+
+	vault write -f auth/approle/role/my-test/secret-id
 
