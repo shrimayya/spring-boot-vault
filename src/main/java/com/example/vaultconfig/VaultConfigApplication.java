@@ -62,7 +62,7 @@ class Application implements CommandLineRunner {
 		System.out.println();
 	}
 
-	/*@PostConstruct
+	@PostConstruct
 	private void postConstruct() throws Exception {
 		try (Connection connection = dataSource.getConnection();
 			 Statement statement = connection.createStatement()) {
@@ -71,5 +71,5 @@ class Application implements CommandLineRunner {
 			System.out.println("Current USER created dynamically ======================> " + resultSet.getString(1));
 			resultSet.close();
 		}
-	}*/
+	}
 }
