@@ -118,3 +118,13 @@ Vault Configuration for AppRole based authentication with whitelist IP poperties
 
 	vault write -f auth/approle/role/my-test/secret-id
 
+Flyway schema history 
+
+mysql> select * from flyway_schema_history;
++----------------+---------+-------------+------+------------------+-------------+----------------------------------+---------------------+----------------+---------+
+| installed_rank | version | description | type | script           | checksum    | installed_by                     | installed_on        | execution_time | success |
++----------------+---------+-------------+------+------------------+-------------+----------------------------------+---------------------+----------------+---------+
+|              1 | 1       | Initial     | SQL  | V1__Initial.sql  | -1873173428 | v-approle-readonly-Ouzen2EUxcXxx | 2020-04-17 07:30:34 |           1354 |       1 |
+|              2 | 2       | testdata    | SQL  | V2__testdata.sql |  1502348332 | v-approle-readonly-F9uV7zzgSwjzB | 2020-04-17 07:32:49 |              7 |       1 |
++----------------+---------+-------------+------+------------------+-------------+----------------------------------+---------------------+----------------+---------+
+2 rows in set (0.00 sec)
