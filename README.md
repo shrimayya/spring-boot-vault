@@ -107,7 +107,7 @@ Vault Configuration for AppRole based authentication with whitelist IP poperties
 
 	vault read my-secret/kar-secret
 
-	vault write auth/approle/role/my-test secret_id_ttl=100m secret_id_num_uses=3 token_num_uses=3 token_ttl=10m token_max_ttl=30m policies=my-test
+	vault write auth/approle/role/my-test secret_id_ttl=100m secret_id_num_uses=3 token_num_uses=3 token_ttl=10m token_max_ttl=30m policies=my-test secret_id_bound_cidrs=127.0.0.1/32
  
 # To the above command u can add secret_id_bound_cidrs=<IP-ADDRESS>  to make it more secured
 
