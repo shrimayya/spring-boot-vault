@@ -53,13 +53,13 @@ class Application implements CommandLineRunner {
 
 
 		// You usually would not print a secret to stdout
-		VaultResponse response = vaultTemplate
+		/*VaultResponse response = vaultTemplate
 				.opsForKeyValue("my-secret", VaultKeyValueOperationsSupport.KeyValueBackend.KV_1).get("kar-secret");
 		System.out.println("Value of Vault config");
 		System.out.println("-------------------------------");
 		System.out.println(response.getData().entrySet());
 		System.out.println("-------------------------------");
-		System.out.println();
+		System.out.println();*/
 	}
 
 	@PostConstruct
